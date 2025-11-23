@@ -1,0 +1,159 @@
+:root {
+  /* Color Palette - Eclipse Theme */
+  --bg-color: #0a0a0c;
+  --bg-gradient: radial-gradient(circle at center, #1a1a2e 0%, #050505 100%);
+
+  --primary-color: #d4af37; /* Gold/Brass for "Contract" feel */
+  --primary-glow: rgba(212, 175, 55, 0.3);
+
+  --accent-color: #7b2cbf; /* Deep Purple for "Eclipse/Void" */
+  --accent-glow: rgba(123, 44, 191, 0.4);
+
+  --text-main: #f0f0f0;
+  --text-dim: #888888;
+
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Typography */
+  --font-title: "Cinzel", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#game-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none; /* Let clicks pass through to canvas by default */
+}
+
+/* Screens */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+  pointer-events: auto; /* Re-enable clicks for UI screens */
+}
+
+.screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Typography & Titles */
+.game-title {
+  font-family: var(--font-title);
+  font-size: 5rem;
+  color: var(--primary-color);
+  text-shadow: 0 0 20px var(--primary-glow);
+  margin-bottom: 0.5rem;
+  letter-spacing: 5px;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+.game-subtitle {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--text-dim);
+  letter-spacing: 8px;
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}
+
+/* Buttons */
+button {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+button:hover {
+  background: var(--primary-color);
+  color: #000;
+  box-shadow: 0 0 15px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 20px var(--primary-glow);
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px var(--primary-glow);
+  }
+}
+
+/* HUD */
+#game-hud {
+  justify-content: flex-start;
+  padding: 2rem;
+}
+
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

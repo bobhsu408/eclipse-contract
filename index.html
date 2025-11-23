@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>蝕界契約 (Eclipse Contract)</title>
+    <meta
+      name="description"
+      content="A dark, mysterious game of contracts and shadows."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-layer">
+          <div id="main-menu" class="screen active">
+            <h1 class="game-title">蝕界契約</h1>
+            <h2 class="game-subtitle">Eclipse Contract</h2>
+            <div class="menu-options">
+              <button class="btn-primary" id="start-btn">
+                開始契約 (Start Contract)
+              </button>
+              <button class="btn-secondary" id="settings-btn">
+                設定 (Settings)
+              </button>
+            </div>
+            <div class="version-info">v0.1.0 - Prototype</div>
+          </div>
+
+          <div id="game-hud" class="screen hidden">
+            <!-- HUD elements will go here -->
+            <div class="top-bar">
+              <span class="resource">Soul: <span id="soul-count">0</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

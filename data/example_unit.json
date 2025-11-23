@@ -1,0 +1,12 @@
+{
+  "name": "Ghoul",
+  "image": "ghoul.png",
+  "scale": 1.0,
+  "speed": 1.5,
+  "hp": 50,
+  "ai_type": "follow",
+  "ai_params": {
+    "follow_distance": 80,
+    "stop_distance": 50
+  }
+}
