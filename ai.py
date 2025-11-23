@@ -190,6 +190,36 @@ class WanderAI(AIBehavior):
             self.entity.vel += diff * self.entity.speed * 0.3
             self.entity.facing_right = diff.x > 0
 
+class CommandableAI(AIBehavior):
+    """可指揮的 AI - 可以在不同模式間切換"""
+    def __init__(self, entity):
+        super().__init__(entity)
+        self.mode = "follow" # default
+        
+        # Sub-behaviors
+        self.follow_ai = FollowPlayerAI(entity, follow_distance=80)
+        
+        # Use entity stats if available
+        attack_range = getattr(entity, 'attack_range', 40)
+        self.attack_ai = AggressiveAI(entity, attack_range=attack_range, chase_range=400)
+        
+        self.guard_ai = GuardPositionAI(entity)
+        
+    def set_mode(self, mode):
+        if mode in ["follow", "attack", "defend"]:
+            self.mode = mode
+            if mode == "defend":
+                # Reset guard position to current position
+                self.guard_ai.guard_pos = self.entity.pos.copy()
+            
+    def update(self, physics, player, enemies=None):
+        if self.mode == "follow":
+            self.follow_ai.update(physics, player, enemies)
+        elif self.mode == "attack":
+            self.attack_ai.update(physics, player, enemies)
+        elif self.mode == "defend":
+            self.guard_ai.update(physics, player, enemies)
+
 # AI 類型對照表 - 方便從字串創建 AI
 AI_TYPES = {
     "follow": FollowPlayerAI,
@@ -198,6 +228,7 @@ AI_TYPES = {
     "aggressive": AggressiveAI,
     "flee": FleeAI,
     "wander": WanderAI,
+    "commandable": CommandableAI,
 }
 
 def create_ai(ai_type, entity, **kwargs):
